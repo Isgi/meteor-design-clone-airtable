@@ -2,6 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
+import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Button } from 'antd';
+const FormItem = Form.Item;
+const Option = Select.Option;
 
 export default class Create extends Component {
 
@@ -29,33 +32,65 @@ export default class Create extends Component {
   }
 
   render() {
-    console.log(this.props);
+    const { getFieldDecorator } = this.props.form;
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 6 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 14 },
+      },
+    };
     return (
-      <div style={styles.container}>
-        <h2>Create Data</h2>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <div style={styles.textInputContain}>
-            <label>Name</label><br/>
-            <input
-              onChange={(event) => {this.setState({inputName:event.target.value})}}
-              value={this.state.inputName}
-              style={styles.textInput} required placeholder='Name' type='text'
-            />
-          </div>
-          <div style={styles.textInputContain}>
-          <label>Age</label><br/>
-          <input
-            onChange={(event) => {this.setState({inputAge:event.target.value})}}
-            value={this.state.inputAge}
-            style={styles.textInput} required placeholder='Age' type='number' min='1'
-          />
-          </div>
-          <div>
-            <button style={styles.buttonSubmit} type='submit'>Submit</button>
-          </div>
-        </form>
-      </div>
-    );
+      <Form onSubmit={this.handleSubmit.bind(this)}>
+        <FormItem
+          {...formItemLayout}
+          label={(
+            <span>
+              Nickname&nbsp;
+              <Tooltip title="What do you want other to call you?">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+          hasFeedback
+          >
+          {getFieldDecorator('nickname', {
+            rules: [{ required: true, message: 'Please input your nickname!', whitespace: true }],
+          })(
+            <Input />
+          )}
+        </FormItem>
+      </Form>
+    )
+    // return (
+    //   <div style={styles.container}>
+    //     <h2>Create Data</h2>
+    //     <form onSubmit={this.handleSubmit.bind(this)}>
+    //       <div style={styles.textInputContain}>
+    //         <label>Name</label><br/>
+    //         <input
+    //           onChange={(event) => {this.setState({inputName:event.target.value})}}
+    //           value={this.state.inputName}
+    //           style={styles.textInput} required placeholder='Name' type='text'
+    //         />
+    //       </div>
+    //       <div style={styles.textInputContain}>
+    //       <label>Age</label><br/>
+    //       <input
+    //         onChange={(event) => {this.setState({inputAge:event.target.value})}}
+    //         value={this.state.inputAge}
+    //         style={styles.textInput} required placeholder='Age' type='number' min='1'
+    //       />
+    //       </div>
+    //       <div>
+    //         <button style={styles.buttonSubmit} type='submit'>Submit</button>
+    //       </div>
+    //     </form>
+    //   </div>
+    // );
   }
 }
 

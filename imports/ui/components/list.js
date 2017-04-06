@@ -3,10 +3,16 @@ import React, { Component} from 'react';
 import { render } from 'react-dom';
 import { Link } from 'react-router-dom';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Button, Table, Icon } from 'antd';
 
 import { Data } from '../../api/data.js';
 
 class List extends Component {
+  constructor() {
+    super();
+    this.rowData = []
+  }
+
   handleDelete(id) {
     Meteor.call('data.remove', id, (err, res) => {
       if (err == undefined) {
@@ -16,39 +22,67 @@ class List extends Component {
   }
 
   renderData(){
-    return this.props.data.map((data, no) => (
-      <tr key={data._id}>
-        <td style={styles.tableColoumn}>{no+1}</td>
-        <td style={styles.tableColoumn}>{data.name}</td>
-        <td style={styles.tableColoumn}>{data.age}</td>
-        <td style={styles.tableColoumn}>
-          <Link to={'update/'+data._id} >Edit</Link> |
-          <a href="#" onClick={()=>this.handleDelete(data._id)}>Delete </a>
-        </td>
-      </tr>
-    ));
+    this.props.data.map((data, no) => {
+      this.rowData.push({
+        key:data._id,
+        no:no+1,
+        name: data.name,
+        age: data.age,
+        action: (
+          <div>
+            <Link style={{marginRight:10}} to={'update/'+data._id} ><Icon type="edit" /> Update</Link> 
+            <a style={{color:'red'}} href="#" onClick={()=>this.handleDelete(data._id)}><Icon type="delete" /> Remove </a>
+          </div>
+        )
+      });
+    });
+    return this.rowData;
   }
 
   render() {
+    const columns =
+      [
+        {
+          title: 'No',
+          dataIndex: 'no'
+        },
+        {
+          title: 'Name',
+          dataIndex: 'name'
+        },
+        {
+          title: 'Age',
+          dataIndex: 'age',
+        },
+        {
+          title: 'Action',
+          dataIndex: 'action',
+        }
+      ];
+    const data = this.renderData();
+
+    // rowSelection object indicates the need for row selection
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      },
+      onSelect: (record, selected, selectedRows) => {
+        console.log(record, selected, selectedRows);
+      },
+      onSelectAll: (selected, selectedRows, changeRows) => {
+        console.log(selected, selectedRows, changeRows);
+      },
+      getCheckboxProps: record => ({
+        disabled: record.name === 'Disabled User',    // Column configuration not to be checked
+      }),
+    };
+
     return (
-      <div style={styles.container}>
-        <h2>Data Page</h2>
-        <Link to='create'><button style={styles.buttonCreate}>Create</button></Link>
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th style={styles.tableColoumn}>No</th>
-              <th style={styles.tableColoumn}>Name</th>
-              <th style={styles.tableColoumn}>Age</th>
-              <th style={styles.tableColoumn}>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderData()}
-          </tbody>
-        </table>
+      <div>
+        <Link to='create'><Button>Create</Button></Link><br/><br/>
+        <Table rowSelection={rowSelection} columns={columns} dataSource={data} />;
       </div>
-    );
+    )
   }
 }
 
@@ -60,25 +94,3 @@ export default createContainer(() => {
     data: Data.find({}).fetch(),
   };
 }, List);
-
-const styles = {
-  container: {
-    margin: '10px 10px 10px 10px'
-  },
-  buttonCreate: {
-    padding: '5px 5px 5px 5px',
-    backgroundColor: '#eee',
-    borderWidth: 0,
-    fontSize: '16px'
-  },
-  table: {
-    margin: '5px 5px 5px 5px',
-    width: '100%'
-  },
-  tableColoumn: {
-    borderBottom: '1px solid #ddd',
-    textAlign: 'center',
-    paddingTop: '10px',
-    paddingBottom: '10px'
-  }
-}
