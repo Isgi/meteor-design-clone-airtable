@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Layout } from 'antd';
 
-import { LayoutHeader } from './components/Header';
-import LayoutBody from './components/Body';
-import { LayoutFooter } from './components/Footer';
+import { LayoutHeader } from './components/header';
+import LayoutBody from './components/body';
+import { LayoutFooter } from './components/footer';
 
 export default class Root extends Component {
 

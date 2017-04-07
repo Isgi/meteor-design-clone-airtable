@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Popover, Badge, Menu, Form, Icon, Input } from 'antd';
 
-import { Notification } from './header/Notification';
+import { Notification } from './header/notification';
 
 const { Header } = Layout;
 const FormItem = Form.Item;
