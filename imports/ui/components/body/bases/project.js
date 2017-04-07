@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 
-import { ProjectHeader } from './project/projectHeader';
-import ProjectContent from './project/projectContent';
+import { ProjectHeader } from './project/project-header';
+import ProjectContent from './project/project-content';
 
 export default class Project extends Component {
   render() {
