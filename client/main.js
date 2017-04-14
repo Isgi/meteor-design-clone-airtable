@@ -1,11 +1,8 @@
 
 
-// djfslkfjlskjdflsdf
 //antd import
 import 'antd/dist/antd.css';
-import 'antd/dist/antd.min.css';
-// import 'antd/dist/antd.js';
-// import 'antd/dist/antd.min.js';
+import 'fixed-data-table/dist/fixed-data-table.css';
 
-//move startup to /imports/startup/client/index.js
-import '/imports/startup/client/index.js';
+//move startup to /imports/startup/client/index.jsx
+import '/imports/startup/client/index';
