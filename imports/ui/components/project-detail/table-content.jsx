@@ -1,5 +1,4 @@
-"use strict";
-import React from 'react';
+import React, { Component } from 'react';
 import {Table, Column, Cell} from 'fixed-data-table';
 
 import FakeObjectDataListStore from '../../../api/FakeObjectDataListStore';
@@ -10,7 +9,7 @@ const TextCell = ({rowIndex, data, columnKey, ...props}) => (
     </Cell>
 );
 
-export default class ResizeExample extends React.Component {
+export default class ResizeExample extends Component {
     constructor(props) {
         super(props);
 

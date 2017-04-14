@@ -2,29 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dd79bef-3f2d-4ad1-a18d-43f0f03143fc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_npm.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/api/FakeObjectDataListStore.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/components/project-detail/table-tabs.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/imports/ui/themes/header-project-detail.jsx" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/client/.babelrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/imports/ui/components/body.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/startup/client/index.js" afterPath="$PROJECT_DIR$/imports/startup/client/index.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/startup/client/routes.js" afterPath="$PROJECT_DIR$/imports/startup/client/routes.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/body/bases.js" afterPath="$PROJECT_DIR$/imports/ui/components/base/base.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/body/bases/project.js" afterPath="$PROJECT_DIR$/imports/ui/components/project/project.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/body/bases/project/project-content.js" afterPath="$PROJECT_DIR$/imports/ui/components/project/project-content.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/body/bases/project/project-header.js" afterPath="$PROJECT_DIR$/imports/ui/components/project/project-header.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/footer.js" afterPath="$PROJECT_DIR$/imports/ui/themes/footer.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/header.js" afterPath="$PROJECT_DIR$/imports/ui/themes/header.jsx" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/components/header/notification.js" afterPath="$PROJECT_DIR$/imports/ui/themes/header/notification.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/ui/index.js" afterPath="$PROJECT_DIR$/imports/ui/index.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/main.js" afterPath="$PROJECT_DIR$/client/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/imports/api/data.js" afterPath="$PROJECT_DIR$/imports/api/Data.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx" afterPath="$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/main.js" afterPath="$PROJECT_DIR$/server/main.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -42,10 +24,20 @@
       <file leaf-file-name="project-detail.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="39" column="24" lean-forward="false" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="37" />
+            <state relative-caret-position="15">
+              <caret line="1" column="51" lean-forward="false" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Data.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/imports/api/Data.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="360">
+              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding>
-                <element signature="e#0#41#0" expanded="true" />
+                <element signature="n#!!doc" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -64,7 +56,7 @@
       <file leaf-file-name="table-tabs.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/table-tabs.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-112">
+            <state relative-caret-position="-164">
               <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="43" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -83,13 +75,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="table-content.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="table-content.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-424">
-              <caret line="4" column="75" lean-forward="false" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
+            <state relative-caret-position="165">
+              <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
               <folding>
-                <element signature="e#14#40#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -139,18 +131,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/imports/ui/components/base/base.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="62" column="1" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="62" selection-end-column="1" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -186,11 +166,12 @@
         <option value="$PROJECT_DIR$/imports/ui/components/project-detail/table.jsx" />
         <option value="$PROJECT_DIR$/imports/api/FakeObjectDataListStore.js" />
         <option value="$PROJECT_DIR$/imports/ui/components/project-detail/table-tabs.jsx" />
-        <option value="$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx" />
-        <option value="$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx" />
         <option value="$PROJECT_DIR$/imports/startup/client/index.jsx" />
         <option value="$PROJECT_DIR$/client/main.js" />
         <option value="$PROJECT_DIR$/imports/startup/client/routes.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx" />
+        <option value="$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx" />
+        <option value="$PROJECT_DIR$/imports/api/Data.js" />
       </list>
     </option>
   </component>
@@ -252,32 +233,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react-admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react-admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="imports" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project-detail" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -470,12 +425,12 @@
       <option name="presentableId" value="Default" />
       <updated>1492024187142</updated>
       <workItem from="1492024188348" duration="19944000" />
-      <workItem from="1492131604187" duration="2812000" />
+      <workItem from="1492131604187" duration="3110000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="22756000" />
+    <option name="totallyTimeSpent" value="23054000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -515,9 +470,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="56" column="18" lean-forward="false" selection-start-line="56" selection-start-column="18" selection-end-line="56" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -534,7 +487,7 @@
         <state relative-caret-position="195">
           <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -544,7 +497,7 @@
         <state relative-caret-position="210">
           <caret line="18" column="4" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="18" selection-end-column="4" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -572,7 +525,7 @@
         <state relative-caret-position="150">
           <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -649,7 +602,7 @@
         <state relative-caret-position="210">
           <caret line="18" column="4" lean-forward="false" selection-start-line="10" selection-start-column="2" selection-end-line="18" selection-end-column="4" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -667,7 +620,7 @@
         <state relative-caret-position="150">
           <caret line="13" column="15" lean-forward="false" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#41#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -677,7 +630,7 @@
         <state relative-caret-position="195">
           <caret line="17" column="6" lean-forward="false" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -744,10 +697,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx">
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="39" column="24" lean-forward="false" selection-start-line="39" selection-start-column="24" selection-end-line="39" selection-end-column="37" />
+        <state relative-caret-position="165">
+          <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -756,7 +709,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/table-tabs.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
+        <state relative-caret-position="-164">
           <caret line="3" column="43" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="43" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -764,12 +717,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/table-content.jsx">
+    <entry file="file://$PROJECT_DIR$/imports/ui/components/project-detail/project-detail.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-424">
-          <caret line="4" column="75" lean-forward="false" selection-start-line="4" selection-start-column="75" selection-end-line="4" selection-end-column="75" />
+        <state relative-caret-position="15">
+          <caret line="1" column="51" lean-forward="false" selection-start-line="1" selection-start-column="51" selection-end-line="1" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/imports/api/Data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
-            <element signature="e#14#40#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>

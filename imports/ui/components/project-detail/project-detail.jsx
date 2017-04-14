@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Popover, Icon } from 'antd';
-import { Link } from 'react-router-dom';
 
 import { LayoutHeaderProjectDetail } from '../../themes/header-project-detail';
 import TableTabs from './table-tabs';
