@@ -9,8 +9,16 @@ export default class TableTabs extends Component {
         super(props);
         this.newTabIndex = 0;
         const panes = [
-            { title: 'Table 1', content: <TableContent/>, key: '1', closable: false },
-            { title: 'Table 2', content: <TableContent/>, key: '2' },
+            { title: 'Table 1', content: (
+                <div style={{overflowX: "scroll"}}>
+                    <TableContent />
+                </div>
+            ), key: '1', closable: false },
+            { title: 'Table 2', content: (
+                <div style={{overflowX: "scroll"}}>
+                    <TableContent />
+                </div>
+            ), key: '2' },
         ];
         this.state = {
             activeKey: panes[0].key,

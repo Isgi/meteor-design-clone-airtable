@@ -7,14 +7,16 @@
   "dependencies": {
     "antd": "^2.9.0",
     "babel-plugin-import": "^1.1.1",
+    "babel-runtime": "^6.23.0",
     "faker": "^4.1.0",
     "fixed-data-table": "^0.6.3",
-    "babel-runtime": "^6.23.0",
     "history": "^4.6.1",
     "indexof": "0.0.1",
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.4.2",
     "react-addons-pure-render-mixin": "^15.4.2",
+    "react-addons-update": "^15.5.2",
+    "react-data-grid": "^2.0.31",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0"

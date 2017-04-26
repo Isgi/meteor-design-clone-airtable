@@ -1,1 +1,1 @@
-import '../imports/api/Data.js';
+import '../imports/api/teams.js';
