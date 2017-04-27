@@ -1,54 +1,89 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { Tag, Col, Row, Icon, Button, Popconfirm, Form, Input, message } from 'antd';
 import { Link } from 'react-router-dom';
-import { Teams } from '../../../api/teams';
 
 const FormItem = Form.Item;
 
-
-
-export default class TeamHeader extends Component {
-  constructor() {
-    super();
-    this.state = {
-      visiblePopDelete : false,
-      visibleButtonMod : false,
-      visibleForm : false,
-      valueForm : '',
-    }
-  }
+class FormTeamName extends Component {
 
   componentDidMount() {
-    this.setState({valueForm:this.props.name});
+    // console.log("click outside");
+    document.addEventListener('click', this.handleClickOutside.bind(this), true);
   }
 
-  buttonMod(visible) {
-    if (!this.state.visiblePopDelete) {
-      this.setState({visibleButtonMod:visible})
+  componentWillUnmount() {
+    // console.log("click outside");
+    document.removeEventListener('click', this.handleClickOutside.bind(this), true);
+  }
+
+  handleClickOutside(event) {
+    const domNode = ReactDOM.findDOMNode(this);
+    // console.log("click outside");
+    if ((!domNode || !domNode.contains(event.target))) {
+      this.props.onClickOutside(true);
     }
   }
 
-  handleDelete(id) {
-      Teams.remove(id, (err, res) => {
-        if (!err) {
-          message.success('Team deleted');
-        }else {
-          message.error('Detele failed, error: '+err)
+  render () {
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <Form layout="inline">
+        <FormItem>
+          {getFieldDecorator('teamname', {
+            rules: [{ required: true, message: 'Team name is required!' }],
+          })(<Input style={{width:'300px'}} prefix={<Icon type="edit" style={{ fontSize: 12 }} />} autoFocus={true} onKeyDown={(e)=>this.props.onKeyDown(e)} />)}
+        </FormItem>
+      </Form>
+    );
+  }
+}
+
+const WrappedFormTeamName = Form.create({
+  onFieldsChange(props, changedFields) {
+    props.onChange(changedFields);
+  },
+  mapPropsToFields(props) {
+    return {
+      teamname: props.teamname
+    };
+  },
+  onValuesChange(_, values) {
+  },
+})(FormTeamName)
+
+export default class TeamHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visiblePopDelete : false,
+      visibleButtonAction : false,
+      visibleForm : false,
+      fieldForm : {
+        teamname: {
+          value: props.data.name,
         }
-      })
+      }
+    }
   }
 
-  handleChangeForm(event) {
-      this.setState({valueForm: event.target.value});
+  buttonAction(visible) {
+    if (!this.state.visiblePopDelete) {
+      this.setState({visibleButtonAction:visible})
+    }
   }
 
-  clickUpdate() {
-    this.setState({visibleForm:true});
+  handleFormChange(changedFields) {
+    this.setState({
+      fieldForm: { ...this.state.fieldForm, ...changedFields },
+    });
   }
 
-  cancel(e) {
-      console.log(e);
-      this.handleVisibleChangePopDelete(false);
+  cancel() {
+      this.setState({
+        visibleButtonAction:false,
+        visiblePopDelete: false
+      });
   }
 
   handleVisibleChangePopDelete(visible) {
@@ -56,52 +91,61 @@ export default class TeamHeader extends Component {
   }
 
   handleKeyPress(e) {
-      if (e.key === 'Enter') {
-          Teams.update(this.props.id,{$set: {name:this.state.valueForm}}, (err, res) => {
-              if (!err) {
-                  message.success('Team edited');
-              }else {
-                  message.error('Edited failed, error: '+err)
-              }
-          })
-          this.setState({
-              visibleForm:false,
-              visibleButtonMod: false
-          });
-      }
+    if (e.key === 'Enter' || e.keyCode === 27) {
+      this.handleUpdate();
+    }
+  }
+
+  handleKlikOutSide(e) {
+    if (e) {
+      this.handleUpdate();
+    }
+  }
+
+  //query update here
+  handleUpdate() {
+    this.setState({
+      visibleForm:false,
+      visibleButtonAction: false
+    });
+  }
+
+  //query delete here
+  handleDelete() {
+
   }
 
   render() {
+    const fieldForm = this.state.fieldForm;
     return (
         <div style={styles.header}>
           <Row>
             <Col span={12}>
               {this.state.visibleForm ? (
-                  <FormItem style={{marginBottom:'2px'}}>
-                      <Input autoFocus={true} value={this.state.valueForm} onKeyPress={this.handleKeyPress.bind(this)} onChange={this.handleChangeForm.bind(this)} prefix={<Icon type="edit" style={{ fontSize: 13 }} />} placeholder="Search base..." />
-                  </FormItem>
+                <WrappedFormTeamName {...fieldForm} onClickOutside={this.handleKlikOutSide.bind(this)} onKeyDown={this.handleKeyPress.bind(this)} onChange={this.handleFormChange.bind(this)} />
               ):(
-                <div onMouseOver={()=>this.buttonMod(true)} onMouseLeave={()=>this.buttonMod(false)}>
-                    {this.state.visibleButtonMod ?
-                        <div style={{}}>
-                          <Link title="Detele" to="#">
-                            <Popconfirm
-                                visible={this.state.visiblePopDelete}
-                                onVisibleChange={()=>this.handleVisibleChangePopDelete(true)}
-                                style={{zIndex:0}}
-                                title="Are you sure delete this team?"
-                                onConfirm={()=>this.handleDelete(this.props.id)}
-                                onCancel={()=>this.cancel()}
-                                okText="Yes"
-                                cancelText="No">
-                              <Icon style={{fontSize:'16px',marginLeft:'5px', marginRight:'2px', color:'gray'}} type="delete"/>
-                            </Popconfirm>
-                          </Link>
-                          <Link title="Edit" onClick={()=>this.clickUpdate()} to="#"><Icon style={{fontSize:'16px', marginLeft:'4px', marginRight:'15px', color:'gray'}} type="edit"/></Link>
-                            {this.props.name}
-                        </div>
-                        : this.props.name
-                    }
+                <div onMouseOver={()=>this.buttonAction(true)} onMouseLeave={()=>this.buttonAction(false)}>
+                  {this.state.visibleButtonAction ?
+                    <div style={{}}>
+                      <Link title="Detele" to="#">
+                        <Popconfirm
+                            placement="bottomLeft"
+                            visible={this.state.visiblePopDelete}
+                            onVisibleChange={()=>this.handleVisibleChangePopDelete(true)}
+                            style={{zIndex:0}}
+                            title="Are you sure delete this team?"
+                            onConfirm={()=>this.handleDelete(this.props.id)}
+                            onCancel={()=>this.cancel()}
+                            okText="Yes"
+                            cancelText="No">
+                          <Icon style={{fontSize:'16px',marginLeft:'5px', marginRight:'2px', color:'gray'}} type="delete"/>
+                        </Popconfirm>
+                      </Link>
+                      <Link title="Edit" onClick={()=>{this.setState({visibleForm: true})}} to="#"><Icon style={{fontSize:'16px', marginLeft:'4px', marginRight:'15px', color:'gray'}} type="edit"/></Link>
+                        {this.state.fieldForm.teamname.value}
+                    </div>
+                    : this.state.fieldForm.teamname.value
+                  }
                 </div>
               )}
             </Col>

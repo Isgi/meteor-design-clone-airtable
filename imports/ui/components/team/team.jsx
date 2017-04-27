@@ -1,46 +1,22 @@
 import React, { Component, PropTypes } from 'react';
 import { Layout, Row, Icon } from 'antd';
 import { Link } from 'react-router-dom';
-import { createContainer } from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
 
 import TeamHeader from './team-header';
 import TeamContent from './team-content';
-import { Teams } from '../../../api/teams'
 
 import { LayoutHeader } from '../../themes/header';
 import { LayoutFooter } from '../../themes/footer';
 
 const { Content } = Layout;
 
-class NewTeam extends Component {
-    actionCreateTeam(e) {
-        e.preventDefault();
-        Teams.insert({
-            name: 'My New Team',
-            createAt: new Date(),
-            updateAt: new Date()
-        },(err, res) => {
-            console.log(res);
-            console.log(err);
-        })
-    }
-
-    render() {
-        return (
-            <Link to="#" onClick={this.actionCreateTeam}>
-                <Icon type="plus"/> Add new team
-            </Link>
-        )
-    }
-}
-
-class Team extends Component {
+export default class Team extends Component {
 
     constructor() {
         super();
         this.state = {
-            windowHeight: $(window).height()
+            windowHeight: $(window).height(),
+            teams: []
         }
     }
 
@@ -59,24 +35,32 @@ class Team extends Component {
     updateDimensions() {
         this.setState({windowHeight:$(window).height()});
     }
-    render() {
-        console.log(this.props.loading);
-        console.log(this.props.teams);
 
+    handleAddTeam() {
+        const team = {
+            name: 'New Name Team',
+        }
+        this.state.teams.push(team);
+        this.setState({teams: this.state.teams});
+    }
+
+    render() {
         return (
             <Layout style={{height:this.state.windowHeight}}>
                 <LayoutHeader />
                 <Content style={styles.content}>
                     <div style={styles.mainContent}>
-                        {this.props.loading ? <Icon type="loading" /> :
-                        this.props.teams.map((team) => (
-                            <Row key={team._id} style={styles.team}>
-                                <TeamHeader id={team._id} name={team.name}/>
-                                <TeamContent />
-                            </Row>
-                        ))}
+                      {this.state.teams.map((team, index) => (
+                        <Row key={index}  style={styles.team}>
+                            <TeamHeader data={team}/>
+                            <TeamContent />
+                        </Row>
+                      ))}
+
                         <Row style={styles.newTeamContent}>
-                            <NewTeam/>
+                            <div onClick={()=>this.handleAddTeam()} style={{cursor:'pointer'}}>
+                                <Icon type="plus"/> Add new team
+                            </div>
                         </Row>
                     </div>
                 </Content>
@@ -85,18 +69,6 @@ class Team extends Component {
         )
     }
 }
-
-Team.propTypes = {
-    loading : React.PropTypes.bool,
-    teams : React.PropTypes.array
-}
-
-export default createContainer(({param}) => {
-    const subscription = Meteor.subscribe('teams',{selector:{},options:{}});
-    const loading = !subscription.ready();
-    const teams = Teams.find({}).fetch();
-    return { loading, teams };
-}, Team);
 
 const styles = {
     content: {
