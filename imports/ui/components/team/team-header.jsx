@@ -104,6 +104,8 @@ export default class TeamHeader extends Component {
 
   //query update here
   handleUpdate() {
+    const nameTeam = this.state.fieldForm.teamname.value;
+    this.props.handleUpdate(nameTeam);
     this.setState({
       visibleForm:false,
       visibleButtonAction: false
@@ -122,7 +124,12 @@ export default class TeamHeader extends Component {
           <Row>
             <Col span={12}>
               {this.state.visibleForm ? (
-                <WrappedFormTeamName {...fieldForm} onClickOutside={this.handleKlikOutSide.bind(this)} onKeyDown={this.handleKeyPress.bind(this)} onChange={this.handleFormChange.bind(this)} />
+                <WrappedFormTeamName
+                  {...fieldForm}
+                  onClickOutside={this.handleKlikOutSide.bind(this)}
+                  onKeyDown={this.handleKeyPress.bind(this)}
+                  onChange={this.handleFormChange.bind(this)}
+                />
               ):(
                 <div onMouseOver={()=>this.buttonAction(true)} onMouseLeave={()=>this.buttonAction(false)}>
                   {this.state.visibleButtonAction ?
@@ -134,7 +141,7 @@ export default class TeamHeader extends Component {
                             onVisibleChange={()=>this.handleVisibleChangePopDelete(true)}
                             style={{zIndex:0}}
                             title="Are you sure delete this team?"
-                            onConfirm={()=>this.handleDelete(this.props.id)}
+                            onConfirm={()=>this.props.handleDelete()}
                             onCancel={()=>this.cancel()}
                             okText="Yes"
                             cancelText="No">

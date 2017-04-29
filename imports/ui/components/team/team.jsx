@@ -8,6 +8,8 @@ import TeamContent from './team-content';
 import { LayoutHeader } from '../../themes/header';
 import { LayoutFooter } from '../../themes/footer';
 
+import TeamsStore from '/imports/firebase/TeamsStore';
+
 const { Content } = Layout;
 
 export default class Team extends Component {
@@ -16,11 +18,16 @@ export default class Team extends Component {
         super();
         this.state = {
             windowHeight: $(window).height(),
-            teams: []
+            teams: {}
         }
     }
 
     componentWillMount() {
+        const self = this;
+        TeamsStore.findAll((teamsFirebase)=>{
+          console.log('in findAll', teamsFirebase);
+          self.setState({teams:teamsFirebase});
+        })
         this.updateDimensions();
     }
 
@@ -40,8 +47,26 @@ export default class Team extends Component {
         const team = {
             name: 'New Name Team',
         }
-        this.state.teams.push(team);
-        this.setState({teams: this.state.teams});
+        const key = TeamsStore.insert(team);
+        console.log(key);
+    }
+
+    _team(teamId, team, index){
+      return (
+        <Row key={index}  style={styles.team}>
+            <TeamHeader
+              data={team}
+              handleDelete={()=>{TeamsStore.delete(teamId)}}
+              handleUpdate= {(teamName)=>{TeamsStore.update(teamId, {name:teamName})}}
+            />
+            <TeamContent />
+        </Row>
+      )
+    }
+
+    renderTeam(){
+      var teams = this.state.teams;
+      return Object.keys(teams).map((key, index) => this._team(key, teams[key], index))
     }
 
     render() {
@@ -50,12 +75,7 @@ export default class Team extends Component {
                 <LayoutHeader />
                 <Content style={styles.content}>
                     <div style={styles.mainContent}>
-                      {this.state.teams.map((team, index) => (
-                        <Row key={index}  style={styles.team}>
-                            <TeamHeader data={team}/>
-                            <TeamContent />
-                        </Row>
-                      ))}
+                      {this.renderTeam()}
 
                         <Row style={styles.newTeamContent}>
                             <div onClick={()=>this.handleAddTeam()} style={{cursor:'pointer'}}>
@@ -84,7 +104,6 @@ const styles = {
     },
     newTeamContent: {
         fontSize: 20,
-        marginTop: '100px',
         borderBottom: '1px solid #e9e9e9'
     },
     team: {
