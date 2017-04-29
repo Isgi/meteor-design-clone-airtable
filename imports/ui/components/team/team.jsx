@@ -84,6 +84,7 @@ const styles = {
     },
     newTeamContent: {
         fontSize: 20,
+        marginTop: '100px',
         borderBottom: '1px solid #e9e9e9'
     },
     team: {

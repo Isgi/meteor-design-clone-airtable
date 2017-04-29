@@ -1,71 +1,77 @@
 import React, { Component } from 'react';
 import { Icon, Form, Input }  from 'antd';
+import ReactDOM from 'react-dom';
 
 const FormItem = Form.Item;
 
 class PopoverFormBase extends Component {
+  constructor() {
+    super();
+    this.state = {
+      defaultIconStyle: styles.icon,
+      defaultBoxStyle: styles.box
+    }
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
+  }
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleOutsideClick, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick, false);
+  }
+
+  handleOutsideClick(e) {
+    if (this.node.contains(e.target)) {
+      return;
+    }
+    this.props.onClickOutside()
+  }
+
+  handleChangeColor(color) {
+    this.props.handleChangeColor(color);
+  }
+
+  handleChangeIcon(icon) {
+    this.props.handleChangeIcon(icon);
+  }
+
+  handleDelete(_id) {
+    this.props.handleDelete(_id);
+  }
 
   render() {
+    const {name, icon, color, alias } = this.props.data;
+    const typeIcons = ['clock-circle-o', 'area-chart', 'check-square-o', 'setting', 'cloud-o', 'barcode', 'bell', 'book', 'hourglass', 'camera-o', 'code-o', 'hdd', 'delete', 'play-circle-o', 'plus-square-o', 'lock', 'unlock', 'calendar', 'file', 'appstore-o', 'laptop', 'mail', 'search', 'tag-o', 'home', 'user', 'team', 'star-o', 'environment-o', 'heart-o', 'filter', 'message', 'calculator', 'database', 'layout', 'tool', 'medicine-box', 'global', 'wallet', 'copyright'];
+    const boxColors = ['#f82b60', '#20c933', '#2d7ff9', '#fcb400', '#666', '#ff08c2', '#8b46ff'];
     const { getFieldDecorator } = this.props.form;
+
     return (
-      <div style={styles.contentPopoverEditBase}>
+      <div  ref={node => { this.node = node;}} style={styles.contentPopoverEditBase}>
         <Form layout="inline">
           <FormItem>
             {getFieldDecorator('basename', {
-              rules: [{ required: true, message: 'Team name is required!' }],
-            })(<Input placeholder="Base Name" style={{width:'188px'}} prefix={<Icon type="edit" style={{ fontSize: 12 }} />} autoFocus={true} onKeyDown={(e)=>this.props.onKeyDown(e)} />)}
+              rules: [{ required: true, message: 'Base name is required!' }],
+            })(<Input placeholder="Base Name" style={{width:'188px'}} prefix={<Icon type="edit" style={{ fontSize: 12 }} />} autoFocus={true} />)}
           </FormItem>
         </Form>
         <div style={styles.contentBoxColor}>
-          <div style={styles.boxColorBlue}></div>
-          <div style={styles.boxColorPink}></div>
-          <div style={styles.boxColorRed}></div>
-          <div style={styles.boxColorYellow}></div>
-          <div style={styles.boxColorGreen}></div>
-          <div style={styles.boxColorPurple}></div>
-          <div style={styles.boxColorGray}></div>
+          {boxColors.map((boxColor, index) =>
+            <div key={index} onClick={() => this.handleChangeColor(boxColor)} style={{...this.state.defaultBoxStyle, background: boxColor}}>
+              {boxColor == color ?
+                <Icon type="check"/> :
+                null
+              }
+            </div>
+          )}
         </div>
         <div style={styles.contentOptionsIcon}>
-          <Icon type="clock-circle-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'#fff', backgroundColor:'#f82b60'}} />
-          <Icon type="area-chart" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="check-square-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="setting" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="cloud-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="barcode" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="bell" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="book" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="hourglass" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="camera-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="code-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="hdd" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="delete" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="play-circle-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="plus-square-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="lock" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="unlock" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="calendar" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="file" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="appstore-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="laptop" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="mail" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="search" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="tag-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="home" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="user" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="team" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="star-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="environment-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="heart-o" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="filter" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="message" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="calculator" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="database" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="layout" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="tool" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="medicine-box" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="global" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="wallet" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
-          <Icon type="copyright" style={{fontSize: 25, cursor:'pointer', margin: '3px', borderRadius: '2px', padding:'2px', color:'gray', backgroundColor:'transparent' }} />
+          {typeIcons.map((type, index)=> (
+            type == icon ?
+              <Icon key={index} type={type} style={{...this.state.defaultIconStyle, ...{backgroundColor: color, color:'#fff'}}} /> :
+              <Icon key={index} onClick={()=>this.handleChangeIcon(type)} type={type} style={this.state.defaultIconStyle} />
+          ))}
         </div>
         <div style={{padding:'10px 0px 0px 5px', cursor:'pointer'}}>
           <Icon type="share-alt"/> Share
@@ -76,7 +82,7 @@ class PopoverFormBase extends Component {
         <div style={{padding:'10px 0px 0px 5px', cursor:'pointer'}}>
           <Icon type="swap"/> Move base to another team
         </div>
-        <div style={{padding:'10px 0px 0px 5px', cursor:'pointer'}}>
+        <div onClick={()=>this.handleDelete(this.props.data._id)}  style={{padding:'10px 0px 0px 5px', cursor:'pointer'}}>
           <Icon type="delete"/> Delete base
         </div>
       </div>
@@ -90,7 +96,7 @@ const WrappedPopoverFormBase = Form.create({
   },
   mapPropsToFields(props) {
     return {
-      teamname: props.teamname
+      basename: props.basename
     };
   },
   onValuesChange(_, values) {
@@ -119,6 +125,27 @@ const styles = {
     height:'100px',
     padding: '2px',
     overflow: 'scroll'
+  },
+  icon: {
+    fontSize: 25,
+    cursor:'pointer',
+    margin: '3px',
+    borderRadius: '2px',
+    padding:'2px',
+    color:'gray',
+    backgroundColor:'transparent'
+  },
+  box: {
+    width: '20px',
+    height: '20px',
+    borderRadius: '2px',
+    margin: '6px 6px 3px 0px',
+    float:'left',
+    cursor:'pointer',
+    color:'#fff',
+    textAlign:'center',
+    lineHeight: '20px',
+    fontSize: '18px'
   },
   boxColorRed: {
     width: '20px',
