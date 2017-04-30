@@ -6,10 +6,12 @@ import Root from '../../ui/index';
 import Team from '../../ui/components/team/team';
 import TeamDetail from '../../ui/components/team-detail/team-detail';
 
+import {team} from '../../stores';
+
 export const routes = () => (
   <Router history={browserHistory}>
     <Root>
-      <Route key="main" exact={true} path="/" component={Team}/>
+      <Route key="main" exact={true} path="/" component={Team} team={team}/>
       <Route key="detail" exact={true} path="/team/:id" component={TeamDetail}/>
     </Root>
   </Router>

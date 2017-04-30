@@ -8,10 +8,12 @@ import TeamContent from './team-content';
 import { LayoutHeader } from '../../themes/header';
 import { LayoutFooter } from '../../themes/footer';
 
-import TeamsStore from '/imports/firebase/TeamsStore';
+//import TeamsStore from '/imports/firebase/TeamsStore';
+import {observer} from 'mobx-react';
 
 const { Content } = Layout;
 
+@observer
 export default class Team extends Component {
 
     constructor() {
@@ -23,11 +25,12 @@ export default class Team extends Component {
     }
 
     componentWillMount() {
-        const self = this;
-        TeamsStore.findAll((teamsFirebase)=>{
-          console.log('in findAll', teamsFirebase);
-          self.setState({teams:teamsFirebase});
-        })
+        //const self = this;
+        //TeamsStore.findAll((teamsFirebase)=>{
+          //console.log('in findAll', teamsFirebase);
+          //self.setState({teams:teamsFirebase});
+        //})
+        this.props.team.find();
         this.updateDimensions();
     }
 
@@ -65,8 +68,7 @@ export default class Team extends Component {
     }
 
     renderTeam(){
-      var teams = this.state.teams;
-      return Object.keys(teams).map((key, index) => this._team(key, teams[key], index))
+      return Object.keys(this.props.team.models).map((key, index) => this._team(key, teams[key], index))
     }
 
     render() {
